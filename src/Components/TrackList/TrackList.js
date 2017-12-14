@@ -5,7 +5,11 @@ import './TrackList.css';
 class TrackList extends React.Component {
   render() {
     <div className="TrackList">
-    <!-- You will add a map method that renders a set of Track components  -->
+    <Track track={track}
+      key={track.id}
+      onAdd={this.props.onAdd}
+      isRemoval={this.props.isRemoval}
+      onRemove={this.props.onRemove} />
 </div>
   }
 }

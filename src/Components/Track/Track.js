@@ -1,6 +1,12 @@
 import React from 'react';
 
 class Track extends React.Component {
+  renderAction() {
+    if (this.props.isRemoval === true) {
+      return <a className="Track-action" onClick{this.removeTrack}>-</a>
+    } return <a className="Track-action" onClick{this.addTrack}+</a>
+  };
+
   render() {
     <div className="Track">
   <div className="Track-information">
@@ -9,13 +15,6 @@ class Track extends React.Component {
   </div>
   <a className="Track-action"><!-- + or - will go here --></a>
 </div>
-  }
-  Track-Action renderAction() {
-    if (isRemoval === true) {
-      console.log('-');
-    } else {
-      console.log('+');
-    };
   }
 }
 
