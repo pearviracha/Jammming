@@ -1,4 +1,4 @@
-import React, from 'react';
+import React from 'react';
 import './App.css';
 
 import Playlist from '../Playlist/Playlist';
@@ -9,15 +9,22 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state {
+    this.state = {
       searchResults: [
         name:'',
         artist: '',
         album: ''
+      ],
+      playlistName: 'Relaxxx',
+      playlistTracks: [
+        name:'',
+        artist: '',
+        album: '',
       ]
-    };
+    }
 
   }
+
   render() {
     return (
       <div>

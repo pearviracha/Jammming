@@ -10,6 +10,10 @@ class TrackList extends React.Component {
       onAdd={this.props.onAdd}
       isRemoval={this.props.isRemoval}
       onRemove={this.props.onRemove} />
+      <{this.props.track.nam}/> //step 35 correct? 
+      <{this.props.track.artist}/>
+      <{this.props.track.album} /> //step 35?
+
 </div>
   }
 }
