@@ -21,7 +21,13 @@ class App extends Component {
         artist: '',
         album: '',
       ]
-    }
+    };
+
+    this.search = this.search.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
+}
+
 
     addTrack(track) {
       let tracks = this.state.playlistTracks;
@@ -29,6 +35,15 @@ class App extends Component {
         tracks.push(track);
         this.setState({playlistTracks: tracks});
       }
+    }
+
+    removeTrack(track) {
+      let tracks = this.state.playlistTracks;
+      tracks.pop(); //is this how to set new state of plyalist? (49)
+    }
+
+    updatePlaylistName(name) {
+      this.setState({playlistName: name});
     }
 
   }
@@ -42,8 +57,9 @@ class App extends Component {
     <div className="App-playlist">
       <SearchResults searchResults={this.state.searchResults}
                       onAdd = {this.addTrack}/>
-      <Playlist playlistName={this.state.playlistName}
-                playlistTracks={this.state.playlistTracks} />
+      <Playlist playlistTracks={this.state.playlistTracks}
+                playlistName={this.state.playlistName}
+                onNameChange={this.updatePlaylistName}/>
     </div>
   </div>
 </div>
