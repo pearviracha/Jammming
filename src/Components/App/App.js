@@ -23,6 +23,14 @@ class App extends Component {
       ]
     }
 
+    addTrack(track) {
+      let tracks = this.state.playlistTracks;
+      if (!tracks.includes(track)) {
+        tracks.push(track);
+        this.setState({playlistTracks: tracks});
+      }
+    }
+
   }
 
   render() {
@@ -32,8 +40,10 @@ class App extends Component {
   <div className="App">
     <!-- Add a SearchBar component -->
     <div className="App-playlist">
-      <SearchResults searchResults={this.state.searchResults}>
-      <!-- Add a Playlist component -->
+      <SearchResults searchResults={this.state.searchResults}
+                      onAdd = {this.addTrack}/>
+      <Playlist playlistName={this.state.playlistName}
+                playlistTracks={this.state.playlistTracks} />
     </div>
   </div>
 </div>
