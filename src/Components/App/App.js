@@ -5,16 +5,14 @@ import Playlist from '../Playlist/Playlist';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 
+import Spotify from '../../util/Spotify';
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchResults: [
-        name:'',
-        artist: '',
-        album: ''
-      ],
+      searchResults: [],
       playlistName: 'Relaxxx',
       playlistTracks: [
         name:'',
