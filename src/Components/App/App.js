@@ -4,7 +4,6 @@ import './App.css';
 import Playlist from '../Playlist/Playlist';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
-
 import Spotify from '../../util/Spotify';
 
 class App extends Component {
@@ -13,19 +12,15 @@ class App extends Component {
 
     this.state = {
       searchResults: [],
-      playlistName: 'Relaxxx',
-      playlistTracks: [
-        name:'',
-        artist: '',
-        album: '',
-      ]
+      playlistName: 'New Playlist',
+      playlistTracks: []
     };
 
     this.search = this.search.bind(this);
+    this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
-    this.search = this.search.bind(this);
 }
 
     addTrack(track) {
@@ -47,13 +42,20 @@ class App extends Component {
 
     savePlaylist() {
       const trackURIs = this.state.playlistTracks.map(track => trackURIs);
+      Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
+        this.setState({
+          playlistName: 'New Playlist',
+          playlistTracks: []
+        });
+      });
     }
 
     search(term) {
       Spotify.search(term).then(searchResults => {
         this.setState({searchResults: searchResults});
       });
-    }
+    };
+  }
 
 
   render() {
@@ -68,6 +70,7 @@ class App extends Component {
       <Playlist playlistTracks={this.state.playlistTracks}
                 playlistName={this.state.playlistName}
                 onNameChange={this.updatePlaylistName}
+                onRemove={this.removeTrack}
                 onSave={this.savePlaylist} />
     </div>
   </div>

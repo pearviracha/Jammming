@@ -1,5 +1,5 @@
 const clientId = '56f5e1c8f43e44418e48f7f1f61b51fe';
-const redirectUri = "http://localhost:3000/";
+const redirectUri = "Pear_Jammming.surge.sh";
 
 const Spotify = {
   getAccessToken() {
@@ -10,14 +10,15 @@ const Spotify = {
     const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
     const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
     if (accessTokenMatch && expiresInmatch) {
-      //what to return?
-    }
-    const expiresIn = //step 80!!
+      accessToken = accessTokenMatch[1];
+      const expiresIn = Number(expiresInMatch[1]);
     window.setTimeout(() => accessToken = '', expiresIn * 1000);
     window.history.pushState('Access Token', null, '/'); //this wipes access token and url parameters, allows us to grab new token when it expires
     return accessToken;
+  } else {
     const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
     window.location = accessUrl;
+  }
 },
 
   search(term) {
@@ -45,13 +46,31 @@ const Spotify = {
     if (!name || !trackURIs) {
       return;
     }
-    const accessToekn = Spotify.getAccessToken();
+    const accessToken = Spotify.getAccessToken();
     const headers = {
       Authorization: `Bearer ${accessToken}`
     };
     let userId;
 
-    return fetch('https://api.spotify.com/v1/me', )
-  }
+    return fetch('https://api.spotify.com/v1/me', {headers: headers}
+  ).then(response => response.json()
+).then(jsonResponse => {
+  userId = jsonResponse.id;
+  return fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
+    headers: headers,
+    method: 'POST',
+    body: JSON.stringify({name: name})
+  }).then(response => response.json()
+).then(jsonResponse => {
+  const playlistId = jsonResponse.id;
+  return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+    headers: headers,
+    method: 'POST',
+    body: JSON.stringify({uris: trackURIs})
+    });
+  });
+});
+};
+};
 
 export default Spotify;
