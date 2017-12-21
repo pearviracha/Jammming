@@ -39,7 +39,9 @@ class App extends React.Component {
 
     removeTrack(track) {
       let tracks = this.state.playlistTracks;
-      tracks.pop(); //is this how to set new state of plyalist? (49)
+      tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
+
+      this.setState({playlistTracks: tracks});
     }
 
     updatePlaylistName(name) {
@@ -77,6 +79,6 @@ class App extends React.Component {
   }
 }
 
-console.log(Spotify.savePlaylist('Christmas', 1));
+console.log(Spotify.savePlaylist('Christmas', 3));
 
 export default App;
