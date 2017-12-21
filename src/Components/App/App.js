@@ -23,6 +23,12 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
 }
 
+  search(term) {
+    Spotify.search(term).then(searchResults => {
+      this.setState({searchResults: searchResults});
+  });
+}
+
     addTrack(track) {
       let tracks = this.state.playlistTracks;
       if (!tracks.includes(track)) {
@@ -42,20 +48,13 @@ class App extends React.Component {
 
     savePlaylist() {
       const trackURIs = this.state.playlistTracks.map(track => trackURIs);
-      Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
-        this.setState({
-          playlistName: 'New Playlist',
-          playlistTracks: []
-        });
-      });
+      Spotify.savePlaylist(this.state.playlistName, trackURIs)//.then(() => {
+          //this.setState({
+          //playlistName: 'New Playlist',
+          //playlistTracks: []
+        //});
+      //});
     }
-
-    search(term) {
-      Spotify.search(term).then(searchResults => {
-        this.setState({searchResults: searchResults});
-      });
-    }
-
 
   render() {
     return (
@@ -77,5 +76,7 @@ class App extends React.Component {
     );
   }
 }
+
+console.log(Spotify.savePlaylist('Christmas', 1));
 
 export default App;
