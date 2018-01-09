@@ -58,7 +58,7 @@ class App extends React.Component {
       //});
     }
 
-  render() {
+  render()   {
     return (
       <div>
   <h1>Ja<span className="highlight">mmm</span>ing</h1>
@@ -78,7 +78,5 @@ class App extends React.Component {
     );
   }
 }
-
-console.log(Spotify.savePlaylist('Christmas', 3));
 
 export default App;

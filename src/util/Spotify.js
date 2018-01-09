@@ -1,5 +1,6 @@
 const clientId = '56f5e1c8f43e44418e48f7f1f61b51fe';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://enchanting-protest.surge.sh';
+
 let accessToken;
 
 const Spotify = {
@@ -44,7 +45,7 @@ const Spotify = {
     });
   },
 
-  savePlaylist(name, trackUris) {
+  savePlaylist(name,trackUris) {
     if (!name || !trackUris.length) {
       return;
     }
